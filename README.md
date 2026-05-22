@@ -40,10 +40,10 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 4. 카메라 테스트 실행
+### 4. 카메라 실행
 
 ```bash
-python vision/camera_test.py
+python vision/camera.py
 ```
 
 카메라 화면이 정상적으로 출력되면 성공입니다.
