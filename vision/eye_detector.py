@@ -30,3 +30,22 @@ def calculate_ear(eye_points):
     ear = (vertical_1 + vertical_2) / (2.0 * horizontal)
 
     return ear
+
+# MediaPipe가 찾은 얼굴 랜드마크 중에서
+# 눈에 해당하는 점들만 골라 실제 화면 좌표로 변환하는 함수 
+def get_eye_points(landmarks, eye_indices, width, height):
+    eye_points = []
+
+    for index in eye_indices:
+        # MediaPipe 얼굴 랜드마크 중 index 번호에 해당하는 점 하나를 가져옴
+        landmark = landmarks[index]
+
+        # MediaPipe 죄표는 0~1 사이 비율값이므로
+        # 실제 화면 크기를 곱해 픽셀 좌표로 변환
+        x = int(landmark.x * width)
+        y = int(landmark.y * height)
+
+        # 변환된 눈 좌표를 리스트에 저장 
+        eye_points.append((x, y))
+
+    return eye_points 
