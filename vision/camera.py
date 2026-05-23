@@ -19,7 +19,7 @@ def read_frame(cap):
         return None
     return frame
 
-# 카메라 사용이 끝난 뒤 자원 정리용 잠수
+# 카메라 사용이 끝난 뒤 자원 정리용 함수
 def release_camera(cap):
     cap.release()
     cv2.destroyAllWindows()
@@ -35,7 +35,7 @@ if __name__ == "__main__":
             print("프레임을 읽을 수 없습니다.")
             break
 
-        # 읽어온 프레임을 화면에 출력ㅔ
+        # 읽어온 프레임을 화면에 출력
         cv2.imshow("Camera Test", frame)
 
         # q 키를 누르면 반복 종료
