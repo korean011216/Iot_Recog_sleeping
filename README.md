@@ -52,6 +52,7 @@ python vision/camera.py
 
 - main 브랜치 직접 작업 금지
 - 기능별 브랜치 생성 후 작업
+- 작업 완료 후 Pull Request(PR)를 생성하여 main 브랜치에 병합
 
 예시:
 
