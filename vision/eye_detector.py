@@ -1,7 +1,7 @@
 import cv2
 import mediapipe as mp
 from scipy.spatial import distance
-from vision.camera import open_camera, read_frame, release_camera
+from camera import open_camera, read_frame, release_camera
 
 LEFT_EYE = [33, 160, 158, 133, 153, 144]
 
