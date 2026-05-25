@@ -1,54 +1,60 @@
-# vision/phone_detector.py
 import cv2
-import mediapipe as mp
+import requests
+import time
 
-# MediaPipe Hands 모델 초기화
-mp_hands = mp.solutions.hands
-# max_num_hands=2 (양손 추적), min_detection_confidence(탐지 신뢰도)
-hands = mp_hands.Hands(
-    static_image_mode=False,
-    max_num_hands=2,
-    min_detection_confidence=0.5,
-    min_tracking_confidence=0.5
-)
+# 나중에 라즈베리파이에서는 전용 IP로 변경 (예: 192.168.0.35)
+SERVER_URL = "http://127.0.0.1:5000/api/detect-phone"
 
-def detect_phone_usage(frame, head_pitch=None):
-    """
-    프레임 내에서 손의 위치를 분석하여 스마트폰 사용 여부를 판별합니다.
-    (추후 head_detector의 head_pitch 값을 받아와 복합 판별에 사용 가능)
-    """
-    is_using_phone = False
+def main():
+    cap = cv2.VideoCapture(0)
+    if not cap.isOpened():
+        print("카메라를 열 수 없습니다.")
+        return
+
+    print("클라이언트 가동. 2초마다 서버로 사진을 보냅니다.")
     
-    # 1. BGR 이미지를 MediaPipe 처리를 위해 RGB로 변환 (최적화)
-    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    
-    # 2. 손 랜드마크 추출
-    results = hands.process(frame_rgb)
-    
-    if results.multi_hand_landmarks:
-        for hand_landmarks in results.multi_hand_landmarks:
-            # 3. 주요 랜드마크(예: 손목 0번)의 y 좌표 확인
-            # 손목이 화면 하단이 아닌 중앙/상단에 있다면 딴짓 중일 가능성
-            wrist_y = hand_landmarks.landmark[mp_hands.HandLandmark.WRIST].y
+    # 누적 경고 카운트 변수
+    warning_count = 0 
+    WARNING_THRESHOLD = 3 # 3번 연속(약 6초) 감지 시 찐 경고!
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        # 사진 화질을 낮추고 메모리상에서 압축
+        frame_resized = cv2.resize(frame, (640, 480))
+        _, img_encoded = cv2.imencode('.jpg', frame_resized)
+        
+        files = {'file': ('image.jpg', img_encoded.tobytes(), 'image/jpeg')}
+        
+        try:
+            # 서버로 사진 전송 및 결과 받기
+            response = requests.post(SERVER_URL, files=files)
+            result = response.json()
             
-            # y 좌표는 0(화면 맨 위) ~ 1(화면 맨 아래) 사이의 값
-            # 임계값(Threshold)은 실제 테스트를 통해 조정 필요 (예: 0.7 이하면 손을 들고 있음)
-            if wrist_y < 0.7: 
-                is_using_phone = True
-                break # 한 손이라도 조건을 만족하면 즉시 판별 종료 (최적화)
+            # 타이머 로직 적용
+            if result.get("is_using_phone"):
+                warning_count += 1
+                print(f"딴짓 의심... ({warning_count}/{WARNING_THRESHOLD})")
                 
-    return is_using_phone, results
+                if warning_count >= WARNING_THRESHOLD:
+                    print("[경고] 스마트폰을 내려놓으세요!")
+                    # 나중에 여기에 진짜 라즈베리파이 핀 제어(부저 소리) 코드가 들어갑니다.
+                    
+            else:
+                if warning_count > 0:
+                    print("다시 집중 상태로 복귀! (카운트 초기화)")
+                else:
+                    print("집중 중")
+                    
+                warning_count = 0 # 딴짓을 멈추면 카운트 즉시 초기화
+                
+        except Exception as e:
+            print(f"서버 연결 실패: {e}")
 
-def draw_hands(frame, results):
-    """
-    디버깅용: 감지된 손 랜드마크를 화면에 그립니다.
-    """
-    if results.multi_hand_landmarks:
-        mp_drawing = mp.solutions.drawing_utils
-        for hand_landmarks in results.multi_hand_landmarks:
-            mp_drawing.draw_landmarks(
-                frame, 
-                hand_landmarks, 
-                mp_hands.HAND_CONNECTIONS
-            )
-    return frame
+        # 2초 대기
+        time.sleep(2)
+
+if __name__ == "__main__":
+    main()
