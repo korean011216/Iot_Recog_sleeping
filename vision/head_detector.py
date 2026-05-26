@@ -1,4 +1,3 @@
-
 import cv2
 import time
 import mediapipe as mp
@@ -14,6 +13,9 @@ face_mesh = mp_face_mesh.FaceMesh(
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5
 )
+
+# 비정상 판정 유예 시간 (초) — 이 시간이 지나야 비정상으로 간주
+GRACE_PERIOD = 5.0
 
 
 # =========================
@@ -68,11 +70,12 @@ if __name__ == "__main__":
 
     cap = open_camera(0)
 
-    abnormal_start = None
+    abnormal_grace_start = None  # 비정상 상태가 시작된 시각 (유예 시간 체크용)
+    abnormal_start = None        # 실제 비정상으로 판정된 시각 (누적 시간 측정용)
     total_abnormal = 0.0
     start_time = time.time()
 
-    print("▶ 시작 (q 종료)")
+    print(f"▶ 시작 (q 종료) — {GRACE_PERIOD}초 지속 시 비정상 판정")
 
     while True:
         frame = read_frame(cap)
@@ -80,12 +83,14 @@ if __name__ == "__main__":
             break
 
         h, w = frame.shape[:2]
+        now = time.time()
 
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         result = face_mesh.process(rgb)
 
         state = "NO FACE"
         color = (0, 0, 255)
+        is_bad = False
 
         # =========================
         # 얼굴 있음
@@ -95,28 +100,47 @@ if __name__ == "__main__":
             for face in result.multi_face_landmarks:
 
                 state = get_head_state(face.landmark, w, h)
-
-                if is_abnormal(state):
-                    color = (0, 0, 255)
-
-                    if abnormal_start is None:
-                        abnormal_start = time.time()
-                else:
-                    color = (0, 255, 0)
-
-                    if abnormal_start is not None:
-                        total_abnormal += time.time() - abnormal_start
-                        abnormal_start = None
+                is_bad = is_abnormal(state)
 
         # =========================
         # 자리비움
         # =========================
         else:
             state = "ABSENT"
-            color = (0, 0, 255)
+            is_bad = True
 
-            if abnormal_start is None:
-                abnormal_start = time.time()
+        if is_bad:
+            # 비정상 상태 진입 — 유예 타이머 시작
+            if abnormal_grace_start is None:
+                abnormal_grace_start = now
+
+            elapsed_grace = now - abnormal_grace_start
+
+            if elapsed_grace >= GRACE_PERIOD:
+                # 유예 시간 초과 → 실제 비정상 판정 + 누적 시작
+                color = (0, 0, 255)
+
+                if abnormal_start is None:
+                    abnormal_start = now
+
+                cv2.putText(frame, "WARNING", (30, 140),
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+            else:
+                # 유예 시간 중 — 카운트다운 표시 (주황색)
+                color = (0, 165, 255)
+                remaining = GRACE_PERIOD - elapsed_grace
+                cv2.putText(frame, f"Grace: {remaining:.1f}s", (30, 140),
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 165, 255), 2)
+
+        else:
+            # 정상 상태로 돌아옴 → 모든 타이머 초기화
+            color = (0, 255, 0)
+
+            if abnormal_start is not None:
+                total_abnormal += now - abnormal_start
+                abnormal_start = None
+
+            abnormal_grace_start = None  # 유예 타이머도 초기화
 
         cv2.putText(frame, f"State: {state}", (30, 50),
                     cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
@@ -145,4 +169,3 @@ if __name__ == "__main__":
     print(f"비정상 시간: {total_abnormal:.2f}초")
     print(f"비정상 비율: {ratio:.2f}%")
     print("====================")
-
