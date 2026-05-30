@@ -60,10 +60,9 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
 </div>
 
 <script>
-// ★ Supabase 키 입력 (없으면 Mock 로그인)
-const SUPABASE_URL = "";
-const SUPABASE_KEY = "";
-const USE_MOCK = !(SUPABASE_URL && SUPABASE_KEY);
+// ★ Flask 서버 주소 — login.html 과 동일하게 맞춰야 함
+const FLASK_URL = "http://127.0.0.1:5000";
+const USE_MOCK  = FLASK_URL.includes("127.0.0.1");
 
 function showErr(msg) {
   const el = document.getElementById("errMsg");
@@ -100,14 +99,16 @@ async function handleRegister() {
       showSuccess("✅ 회원가입 완료! (Mock) 로그인 페이지로 이동합니다.");
       setTimeout(() => location.href = "login.html", 1500);
     } else {
-      // ★ Supabase Auth 실제 회원가입
-      const res = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", apikey: SUPABASE_KEY },
-        body: JSON.stringify({ email, password }),
+      // ★ Flask API 실제 회원가입
+      const res  = await fetch(`${FLASK_URL}/api/auth/register`, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ email, password }),
       });
       const data = await res.json();
-      if (data.error) { showErr(data.error_description || "회원가입 실패"); return; }
+
+      if (!res.ok) { showErr(data.error || "회원가입 실패"); return; }
+
       showSuccess("✅ 회원가입 완료! 로그인 페이지로 이동합니다.");
       setTimeout(() => location.href = "login.html", 1500);
     }

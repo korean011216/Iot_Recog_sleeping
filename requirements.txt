@@ -5,3 +5,7 @@ uvicorn
 streamlit
 requests
 scipy
+flask
+flask-cors
+supabase
+ultralytics

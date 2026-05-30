@@ -8,8 +8,6 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:14px;min-height:100vh;padding:24px 28px}
-
-/* ── Header ── */
 .header{display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid #2a2f40;margin-bottom:24px}
 .header-left{display:flex;align-items:center;gap:12px}
 .live-dot{width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e;animation:pulse 2s infinite;flex-shrink:0}
@@ -22,19 +20,13 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
 .db-badge{font-size:11px;padding:2px 8px;border-radius:4px;font-weight:600}
 .db-mock{background:#1c1a10;color:#fbbf24;border:1px solid #fbbf24}
 .db-live{background:#14532d;color:#22c55e;border:1px solid #22c55e}
-
-/* ── 상태 배너 ── */
 .status-banner{display:flex;align-items:center;gap:12px;padding:12px 18px;background:#141720;border:1px solid #2a2f40;border-radius:10px;margin-bottom:20px;flex-wrap:wrap}
 .status-badge{font-size:13px;font-weight:600;padding:4px 14px;border-radius:20px}
 .status-item{font-size:13px;color:#8b90a0}
 .status-item span{color:#e8eaf0;font-family:monospace}
 .status-divider{color:#2a2f40;font-size:16px}
-
-/* ── 카메라 미실행 배너 ── */
 .cam-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;background:#141720;border:1px solid #2a2f40;border-radius:10px;margin-bottom:20px;flex-wrap:wrap}
 .cam-banner-code{background:#1c2030;border:1px solid #2a2f40;border-radius:8px;padding:7px 14px;font-family:monospace;font-size:12px;color:#60a5fa}
-
-/* ── 대기/빈 상태 화면 ── */
 .empty-screen{text-align:center;padding:80px 0}
 .empty-icon{font-size:52px;margin-bottom:16px}
 .empty-title{font-size:16px;font-weight:600;color:#e8eaf0;margin-bottom:8px}
@@ -42,8 +34,6 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
 .empty-code{background:#141720;border:1px solid #2a2f40;border-radius:8px;padding:8px 20px;font-family:monospace;font-size:12px;color:#60a5fa;display:inline-block}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 .blinking{animation:blink 1.2s infinite}
-
-/* ── Metric Cards ── */
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
 .metric-card{background:#141720;border:1px solid #2a2f40;border-radius:10px;padding:14px 16px}
 .metric-label{font-size:11px;color:#5a5f72;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
@@ -51,16 +41,10 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
 .metric-sub{font-size:11px;color:#5a5f72;margin-top:6px}
 .metric-bar{height:3px;border-radius:2px;background:#1c2030;margin-top:10px;overflow:hidden}
 .metric-bar-fill{height:100%;border-radius:2px;transition:width .6s ease}
-
-/* ── Panels ── */
 .panel{background:#141720;border:1px solid #2a2f40;border-radius:10px;padding:18px}
 .panel-title{font-size:12px;color:#5a5f72;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
-
-/* ── Grid ── */
 .grid-main{display:grid;grid-template-columns:1fr 300px;gap:16px;margin-bottom:16px}
 .grid-bottom{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-
-/* ── Charts ── */
 .chart-line{position:relative;width:100%;height:200px}
 .chart-bar{position:relative;width:100%;height:160px}
 .chart-donut-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
@@ -68,8 +52,6 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
 .donut-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
 .donut-num{font-size:22px;font-weight:600;font-family:monospace;color:#22c55e}
 .donut-txt{font-size:10px;color:#5a5f72}
-
-/* ── Timeline ── */
 .tl-bar{display:flex;height:26px;border-radius:5px;overflow:hidden;gap:2px;margin-bottom:6px}
 .tl-seg{height:100%;border-radius:3px;transition:opacity .2s}
 .tl-seg:hover{opacity:.7}
@@ -77,25 +59,17 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
 .tl-legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 .tl-legend-item{display:flex;align-items:center;gap:4px;font-size:11px;color:#8b90a0}
 .tl-legend-sq{width:8px;height:8px;border-radius:2px;flex-shrink:0}
-
-/* ── Pie legend ── */
 .pie-legend{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%}
 .pie-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#8b90a0}
 .pie-sq{width:10px;height:10px;border-radius:2px;flex-shrink:0}
-
-/* ── Stat rows ── */
 .stat-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #1c2030}
 .stat-row:last-child{border-bottom:none}
 .stat-label{font-size:13px;color:#8b90a0;display:flex;align-items:center;gap:7px}
 .stat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .stat-val{font-family:monospace;font-size:13px;font-weight:600}
-
-/* ── Chart legend ── */
 .chart-legend{display:flex;gap:14px;margin-top:8px;margin-bottom:14px}
 .chart-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#8b90a0}
 .chart-legend-sq{width:10px;height:10px;border-radius:2px}
-
-/* ── Alerts ── */
 .alert-list{display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto}
 .alert-item{padding:10px 12px;border-radius:8px;background:#1c2030;border-left:3px solid}
 .alert-item.danger{border-color:#f87171}
@@ -108,7 +82,7 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
 </head>
 <body>
 
-<!-- ── Header (항상 표시) ── -->
+<!-- ── Header ── -->
 <div class="header">
   <div class="header-left">
     <div class="live-dot"></div>
@@ -120,14 +94,12 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
   <div style="display:flex;align-items:center;gap:10px">
     <span style="font-size:12px;color:#5a5f72" id="userEmail"></span>
     <span class="db-badge db-mock" id="dbBadge">● MOCK DATA</span>
-    <span class="live-badge" id="liveBadge">● LIVE</span>
+    <span class="live-badge" id="liveBadge" style="display:none">● LIVE</span>
     <button class="logout-btn" onclick="handleLogout()">로그아웃</button>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════
-  화면 1: 카메라 미실행 — 이전 기록 조회
-════════════════════════════════════════ -->
+<!-- ════════════ 화면1: 카메라 미실행 ════════════ -->
 <div id="screenHistory" style="display:none">
   <div class="cam-banner">
     <div style="display:flex;align-items:center;gap:10px">
@@ -137,18 +109,14 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
         <div style="font-size:12px;color:#5a5f72;margin-top:2px">이전 세션 기록을 표시하고 있습니다. 카메라를 실행하면 자동으로 라이브 모드로 전환됩니다.</div>
       </div>
     </div>
-    <div class="cam-banner-code">python vision/phone_detector.py</div>
+    <div class="cam-banner-code">python vision/main_detector.py</div>
   </div>
-
-  <!-- 이전 기록 없음 -->
   <div id="noHistoryMsg" style="display:none" class="empty-screen">
     <div class="empty-icon">📭</div>
     <div class="empty-title">오늘 학습 기록이 없습니다</div>
     <div class="empty-sub">카메라를 실행하면 모니터링이 시작됩니다.</div>
-    <div class="empty-code">python vision/phone_detector.py</div>
+    <div class="empty-code">python vision/main_detector.py</div>
   </div>
-
-  <!-- 이전 기록 있음 → 대시보드 컨텐츠 -->
   <div id="historyDashboard" style="display:none">
     <div class="grid-4">
       <div class="metric-card">
@@ -179,7 +147,7 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
     <div class="grid-main">
       <div class="panel">
         <div class="panel-title"><span>📈 시간대별 집중도 흐름</span><span id="h_timeRange" style="font-size:11px">—</span></div>
-        <div class="chart-line"><canvas id="h_lineChart" role="img" aria-label="이전 기록 집중도 꺾은선 그래프"></canvas></div>
+        <div class="chart-line"><canvas id="h_lineChart"></canvas></div>
         <div class="chart-legend">
           <div class="chart-legend-item"><div class="chart-legend-sq" style="background:#60a5fa"></div>집중도</div>
           <div class="chart-legend-item"><div class="chart-legend-sq" style="background:#fbbf24"></div>EAR×100</div>
@@ -199,7 +167,7 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
         <div class="panel-title"><span>🥧 시간 분포</span></div>
         <div class="chart-donut-wrap">
           <div class="chart-donut">
-            <canvas id="h_donutChart" width="160" height="160" role="img" aria-label="이전 기록 시간 분포 도넛"></canvas>
+            <canvas id="h_donutChart" width="160" height="160"></canvas>
             <div class="donut-overlay"><div class="donut-num" id="h_donutPct">—</div><div class="donut-txt">집중</div></div>
           </div>
           <div class="pie-legend">
@@ -215,7 +183,7 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
     <div class="grid-bottom">
       <div class="panel">
         <div class="panel-title"><span>🙆 자세 불량 방향별 통계</span></div>
-        <div class="chart-bar"><canvas id="h_headChart" role="img" aria-label="이전 기록 자세 불량 막대 그래프"></canvas></div>
+        <div class="chart-bar"><canvas id="h_headChart"></canvas></div>
         <div style="margin-top:12px">
           <div class="stat-row">
             <div class="stat-label"><div class="stat-dot" style="background:#fbbf24"></div>자세 불량 총 시간</div>
@@ -235,19 +203,15 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
   </div>
 </div>
 
-<!-- ════════════════════════════════════════
-  화면 2: 카메라 실행 중 + 데이터 없음
-════════════════════════════════════════ -->
+<!-- ════════════ 화면2: 데이터 대기 중 ════════════ -->
 <div id="screenWaiting" style="display:none" class="empty-screen">
   <div class="empty-icon blinking">📡</div>
   <div class="empty-title">라즈베리파이 연결 대기 중</div>
   <div class="empty-sub">카메라가 실행되면 2초 안에 자동으로 대시보드가 시작됩니다.</div>
-  <div class="empty-code" id="waitingDots">데이터 수신 대기 중 ...</div>
+  <div class="empty-code">데이터 수신 대기 중 ...</div>
 </div>
 
-<!-- ════════════════════════════════════════
-  화면 3: 라이브 대시보드 (카메라 실행 + 데이터 있음)
-════════════════════════════════════════ -->
+<!-- ════════════ 화면3: 라이브 대시보드 ════════════ -->
 <div id="screenLive" style="display:none">
   <div class="status-banner">
     <span class="status-badge" id="statusBadge">대기 중</span>
@@ -289,7 +253,7 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
   <div class="grid-main">
     <div class="panel">
       <div class="panel-title"><span>📈 시간대별 집중도 흐름</span><span id="timeRange" style="font-size:11px">—</span></div>
-      <div class="chart-line"><canvas id="lineChart" role="img" aria-label="시간대별 집중도 꺾은선 그래프"></canvas></div>
+      <div class="chart-line"><canvas id="lineChart"></canvas></div>
       <div class="chart-legend">
         <div class="chart-legend-item"><div class="chart-legend-sq" style="background:#60a5fa"></div>집중도</div>
         <div class="chart-legend-item"><div class="chart-legend-sq" style="background:#fbbf24"></div>EAR×100 (졸음 지표)</div>
@@ -309,7 +273,7 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
       <div class="panel-title"><span>🥧 시간 분포</span></div>
       <div class="chart-donut-wrap">
         <div class="chart-donut">
-          <canvas id="donutChart" width="160" height="160" role="img" aria-label="시간 분포 도넛 차트"></canvas>
+          <canvas id="donutChart" width="160" height="160"></canvas>
           <div class="donut-overlay"><div class="donut-num" id="donutPct">—</div><div class="donut-txt">집중</div></div>
         </div>
         <div class="pie-legend">
@@ -325,7 +289,7 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
   <div class="grid-bottom">
     <div class="panel">
       <div class="panel-title"><span>🙆 자세 불량 방향별 통계</span></div>
-      <div class="chart-bar"><canvas id="headChart" role="img" aria-label="자세 불량 방향별 막대 그래프"></canvas></div>
+      <div class="chart-bar"><canvas id="headChart"></canvas></div>
       <div style="margin-top:12px">
         <div class="stat-row">
           <div class="stat-label"><div class="stat-dot" style="background:#fbbf24"></div>자세 불량 총 시간</div>
@@ -346,29 +310,30 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
 
 <script>
 // ════════════════════════════════════════════
-// ★ Supabase 설정 및 기타 상수 ★
+// ★ Flask 서버 주소 — login.html 과 동일하게
 // ════════════════════════════════════════════
-const SUPABASE_URL  = "";
-const SUPABASE_KEY  = "";
-const USE_MOCK      = !(SUPABASE_URL && SUPABASE_KEY);
+const FLASK_URL    = "http://127.0.0.1:5000";
+const USE_MOCK     = FLASK_URL.includes("127.0.0.1");
 const POLL_INTERVAL = 2000;
-const EAR_THRESHOLD    = 0.18;
-const DROWSY_THRESHOLD = 2.0;
+const EAR_THRESHOLD = 0.18;
 
 // ════════════════════════════════════════════
 // 인증 체크
 // ════════════════════════════════════════════
 const _userRaw = localStorage.getItem("fg_user");
-if (!_userRaw) { location.href = "login.html"; } //이 대시보드 화면만 보고 싶으면 이 줄 주석처리!!!
-const CURRENT_USER    = JSON.parse(_userRaw || "{}");
-const CURRENT_SESSION = localStorage.getItem("fg_session") || "mock-session-id";
-const TOKEN           = localStorage.getItem("fg_token") || "";
+if (!_userRaw) { location.href = "login.html"; }
+const CURRENT_USER = JSON.parse(_userRaw || "{}");
+let   CURRENT_SESSION = localStorage.getItem("fg_session") || "";
 
-document.getElementById("userEmail").textContent  = CURRENT_USER.email || "";
-document.getElementById("headerSub").textContent  =
+document.getElementById("userEmail").textContent = CURRENT_USER.email || "";
+document.getElementById("headerSub").textContent =
   `📅 ${new Date().toLocaleDateString("ko-KR")}  |  ${CURRENT_USER.email || ""}`;
 
 function handleLogout() {
+  // 세션 종료 API 호출
+  if (CURRENT_SESSION && !USE_MOCK) {
+    fetch(`${FLASK_URL}/api/session/end`, { method:"POST" }).catch(()=>{});
+  }
   ["fg_user","fg_token","fg_session"].forEach(k => localStorage.removeItem(k));
   location.href = "login.html";
 }
@@ -376,7 +341,6 @@ function handleLogout() {
 // ════════════════════════════════════════════
 // 화면 전환
 // ════════════════════════════════════════════
-// mode: "history" | "waiting" | "live"
 function showScreen(mode) {
   document.getElementById("screenHistory").style.display = mode === "history" ? "" : "none";
   document.getElementById("screenWaiting").style.display = mode === "waiting" ? "" : "none";
@@ -385,22 +349,62 @@ function showScreen(mode) {
 }
 
 // ════════════════════════════════════════════
+// Flask API 호출
+// ════════════════════════════════════════════
+async function fetchSessionStatus() {
+  const res = await fetch(`${FLASK_URL}/api/session/status`);
+  return res.json();
+}
+
+async function fetchTodayStats() {
+  const res = await fetch(`${FLASK_URL}/api/stats/today?user_id=${CURRENT_USER.id}`);
+  return res.json();
+}
+
+async function fetchTodaySessions() {
+  const res = await fetch(`${FLASK_URL}/api/sessions/today?user_id=${CURRENT_USER.id}`);
+  return res.json();
+}
+
+async function fetchSessionLogs(sessionId) {
+  const res = await fetch(`${FLASK_URL}/api/logs/session/${sessionId}?user_id=${CURRENT_USER.id}`);
+  return res.json();
+}
+
+async function fetchLatestLog(sessionId) {
+  const res = await fetch(`${FLASK_URL}/api/logs/latest?user_id=${CURRENT_USER.id}&session_id=${sessionId}`);
+  return res.json();
+}
+
+async function fetchAlerts(sessionId) {
+  const res = await fetch(`${FLASK_URL}/api/alerts?user_id=${CURRENT_USER.id}&session_id=${sessionId}`);
+  return res.json();
+}
+
+// ════════════════════════════════════════════
 // Mock 데이터
 // ════════════════════════════════════════════
 let mockTick = 0;
-let mockCameraOn = false; // Mock에서 카메라 시뮬레이션 (30초 후 켜짐)
+let mockHistoryLogs = [];
+let mockLiveLogs    = [];
+let historyLoaded   = false;
+const MOCK_CAMERA_START = 15; // 15틱(30초) 후 카메라 켜짐
 
 function generateMockHistoryLogs() {
   const logs = [];
   const poses = ["FRONT","FRONT","FRONT","FRONT","DOWN","LEFT","RIGHT","UP","ABSENT"];
-  const now = Date.now() - 2 * 60 * 60 * 1000; // 2시간 전 세션
+  const now   = Date.now() - 2 * 60 * 60 * 1000;
   for (let i = 360; i >= 0; i--) {
     const t    = new Date(now - i * 10000);
     const pose = poses[Math.floor(Math.random() * poses.length)];
     const ear  = pose === "FRONT" ? 0.22 + Math.random() * 0.08 : 0.12 + Math.random() * 0.08;
-    logs.push({ id: crypto.randomUUID(), user_id:"mock-user", session_id:"mock-prev-session",
-      is_using_phone: Math.random() < 0.07, ear: parseFloat(ear.toFixed(3)),
-      head_pose: pose, created_at: t.toISOString() });
+    logs.push({
+      measured_at: t.toISOString(), ear: parseFloat(ear.toFixed(3)),
+      head_pose: pose, is_drowsy: ear < 0.18 ? 1 : 0,
+      is_bad_pose: pose !== "FRONT" && pose !== "ABSENT" ? 1 : 0,
+      is_absent: pose === "ABSENT" ? 1 : 0,
+      is_using_phone: Math.random() < 0.07 ? 1 : 0,
+    });
   }
   return logs;
 }
@@ -408,79 +412,46 @@ function generateMockHistoryLogs() {
 function generateLiveMock() {
   mockTick++;
   const cycle = mockTick % 20;
-  let pose = "FRONT", ear = 0.25 + Math.random() * 0.05, is_phone = false;
+  let pose = "FRONT", ear = 0.25 + Math.random() * 0.05, is_phone = 0;
   if      (cycle >= 16) { pose = "DOWN";   ear = 0.14 + Math.random() * 0.04; }
   else if (cycle >= 13) { pose = "LEFT";   ear = 0.20 + Math.random() * 0.04; }
-  else if (cycle >= 11) { is_phone = true; }
+  else if (cycle >= 11) { is_phone = 1; }
   else if (cycle >= 9)  { pose = "ABSENT"; ear = 0.0; }
-  return { id: crypto.randomUUID(), user_id:"mock-user", session_id:"mock-session",
-    is_using_phone: is_phone, ear: parseFloat(ear.toFixed(3)),
-    head_pose: pose, created_at: new Date().toISOString() };
+  return {
+    measured_at: new Date().toISOString(), ear: parseFloat(ear.toFixed(3)),
+    head_pose: pose, is_drowsy: ear < 0.18 && pose !== "ABSENT" ? 1 : 0,
+    is_bad_pose: pose !== "FRONT" && pose !== "ABSENT" ? 1 : 0,
+    is_absent: pose === "ABSENT" ? 1 : 0,
+    is_using_phone: is_phone,
+  };
 }
 
 // ════════════════════════════════════════════
-// Supabase 쿼리
+// 통계 계산 (monitoring_logs 배열 → 수치)
 // ════════════════════════════════════════════
-function sbHeaders() {
-  return { apikey: SUPABASE_KEY, Authorization: `Bearer ${TOKEN || SUPABASE_KEY}` };
-}
-
-async function fetchTodayLogs() {
-  const today = new Date(); today.setHours(0,0,0,0);
-  const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/study_logs?user_id=eq.${CURRENT_USER.id}&created_at=gte.${today.toISOString()}&order=created_at.asc`,
-    { headers: sbHeaders() }
-  );
-  return res.json();
-}
-
-async function fetchSessionLogs() {
-  const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/study_logs?user_id=eq.${CURRENT_USER.id}&session_id=eq.${CURRENT_SESSION}&order=created_at.asc`,
-    { headers: sbHeaders() }
-  );
-  return res.json();
-}
-
-async function fetchLatest() {
-  const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/study_logs?user_id=eq.${CURRENT_USER.id}&session_id=eq.${CURRENT_SESSION}&order=created_at.desc&limit=1`,
-    { headers: sbHeaders() }
-  );
-  const d = await res.json();
-  return d[0] || null;
-}
-
-// ════════════════════════════════════════════
-// 통계 계산 (study_logs 배열 → 수치)
-// ════════════════════════════════════════════
-let eyeClosedSince = null;
-
 function calcStats(logs) {
   if (!logs || logs.length === 0) return null;
   let focusCnt=0, drowsyCnt=0, phoneCnt=0, poseCnt=0, absentCnt=0;
   let headDown=0, headUp=0, headLeft=0, headRight=0, drowsyEvents=0;
   const tlEar=[], tlFocus=[], tlLabels=[], tlSegs=[];
+  let prevDrowsy = false;
 
   logs.forEach((log, i) => {
-    const ear   = log.ear || 0;
-    const head  = log.head_pose || "ABSENT";
-    const phone = log.is_using_phone || false;
+    const ear      = log.ear || 0;
+    const head     = log.head_pose || "ABSENT";
+    const phone    = log.is_using_phone;
+    const isDrowsy = log.is_drowsy;
+    const isBad    = log.is_bad_pose;
+    const isAbsent = log.is_absent;
 
-    let isDrowsy = false;
-    if (ear < EAR_THRESHOLD && head !== "ABSENT") {
-      if (!eyeClosedSince) eyeClosedSince = new Date(log.created_at).getTime();
-      if ((new Date(log.created_at).getTime() - eyeClosedSince) / 1000 >= DROWSY_THRESHOLD) isDrowsy = true;
-    } else {
-      if (eyeClosedSince) drowsyEvents++;
-      eyeClosedSince = null;
-    }
+    if (isDrowsy && !prevDrowsy) drowsyEvents++;
+    prevDrowsy = !!isDrowsy;
 
     let seg = "#22c55e";
-    if      (head === "ABSENT")  { absentCnt++; seg = "#4b5563"; }
-    else if (phone)              { phoneCnt++;  seg = "#f87171"; }
-    else if (isDrowsy)           { drowsyCnt++; seg = "#fbbf24"; }
-    else if (head !== "FRONT")   {
+    if      (isAbsent) { absentCnt++; seg = "#4b5563"; }
+    else if (phone)    { phoneCnt++;  seg = "#f87171"; }
+    else if (isDrowsy) { drowsyCnt++; seg = "#fbbf24"; }
+    else if (isBad)    {
       poseCnt++; seg = "#a78bfa";
       if (head==="DOWN")  headDown++;
       if (head==="UP")    headUp++;
@@ -493,7 +464,7 @@ function calcStats(logs) {
       const bad = (phoneCnt + drowsyCnt + poseCnt) / Math.max(i+1,1);
       tlEar.push(parseFloat((ear * 100).toFixed(1)));
       tlFocus.push(Math.round((1 - bad) * 100));
-      tlLabels.push(new Date(log.created_at).toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"}));
+      tlLabels.push(new Date(log.measured_at).toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"}));
     }
   });
 
@@ -503,8 +474,8 @@ function calcStats(logs) {
     total: logs.length, focusCnt, drowsyCnt, phoneCnt, poseCnt, absentCnt,
     headDown, headUp, headLeft, headRight, drowsyEvents, score, bad,
     tlEar, tlFocus, tlLabels, tlSegs,
-    startTime: new Date(logs[0].created_at),
-    endTime:   new Date(logs[logs.length-1].created_at),
+    startTime: new Date(logs[0].measured_at),
+    endTime:   new Date(logs[logs.length-1].measured_at),
   };
 }
 
@@ -518,8 +489,7 @@ function fmtSec(sec) {
   return `${s}초`;
 }
 function fmtMin(sec) {
-  const m = Math.floor(sec/60);
-  return m > 0 ? `${m}분` : `${sec}초`;
+  return Math.floor(sec/60) > 0 ? `${Math.floor(sec/60)}분` : `${sec}초`;
 }
 function statusLabel(head, phone, isDrowsy) {
   if (head==="ABSENT") return ["이석","#4b5563"];
@@ -530,70 +500,53 @@ function statusLabel(head, phone, isDrowsy) {
 }
 
 // ════════════════════════════════════════════
-// Chart.js 초기화 — 라이브용
+// Chart.js 초기화
 // ════════════════════════════════════════════
 Chart.defaults.color = "#5a5f72";
 Chart.defaults.borderColor = "#2a2f40";
 
-const lineChart = new Chart(document.getElementById("lineChart"), {
-  type:"line",
-  data:{ labels:[], datasets:[
-    { label:"집중도", data:[], borderColor:"#60a5fa", backgroundColor:"rgba(96,165,250,.07)", borderWidth:2, pointRadius:3, pointBackgroundColor:"#60a5fa", tension:.4, fill:true },
-    { label:"EAR×100", data:[], borderColor:"#fbbf24", backgroundColor:"transparent", borderWidth:1.5, borderDash:[4,4], pointRadius:2, pointBackgroundColor:"#fbbf24", tension:.4 },
-  ]},
-  options:{ responsive:true, maintainAspectRatio:false,
-    plugins:{ legend:{ display:false } },
-    scales:{ y:{ min:0, max:100, grid:{ color:"#1c2030" }, ticks:{ stepSize:25 } },
-             x:{ grid:{ color:"#1c2030" }, ticks:{ font:{ size:10 }, maxTicksLimit:8 } } } },
-});
-const donutChart = new Chart(document.getElementById("donutChart"), {
-  type:"doughnut",
-  data:{ labels:["집중","자세 불량","졸음","스마트폰","이석"],
-    datasets:[{ data:[1,0,0,0,0], backgroundColor:["#22c55e","#a78bfa","#fbbf24","#f87171","#4b5563"], borderWidth:0, hoverOffset:4 }] },
-  options:{ cutout:"65%", plugins:{ legend:{ display:false } } },
-});
-const headChart = new Chart(document.getElementById("headChart"), {
-  type:"bar",
-  data:{ labels:["고개숙임(DOWN)","좌측(LEFT)","우측(RIGHT)","위(UP)"],
-    datasets:[{ label:"누적(초)", data:[0,0,0,0],
-      backgroundColor:["rgba(251,191,36,.5)","rgba(167,139,250,.5)","rgba(167,139,250,.5)","rgba(96,165,250,.4)"],
-      borderColor:["#fbbf24","#a78bfa","#a78bfa","#60a5fa"], borderWidth:1.5, borderRadius:4 }] },
-  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } },
-    scales:{ y:{ grid:{ color:"#1c2030" }, ticks:{ callback: v=>v+"초" } },
-             x:{ grid:{ display:false }, ticks:{ font:{ size:11 } } } } },
-});
+function makeLineChart(id) {
+  return new Chart(document.getElementById(id), {
+    type:"line",
+    data:{ labels:[], datasets:[
+      { label:"집중도", data:[], borderColor:"#60a5fa", backgroundColor:"rgba(96,165,250,.07)", borderWidth:2, pointRadius:3, pointBackgroundColor:"#60a5fa", tension:.4, fill:true },
+      { label:"EAR×100", data:[], borderColor:"#fbbf24", backgroundColor:"transparent", borderWidth:1.5, borderDash:[4,4], pointRadius:2, pointBackgroundColor:"#fbbf24", tension:.4 },
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } },
+      scales:{ y:{ min:0, max:100, grid:{ color:"#1c2030" }, ticks:{ stepSize:25 } },
+               x:{ grid:{ color:"#1c2030" }, ticks:{ font:{ size:10 }, maxTicksLimit:8 } } } },
+  });
+}
+function makeDonutChart(id) {
+  return new Chart(document.getElementById(id), {
+    type:"doughnut",
+    data:{ labels:["집중","자세 불량","졸음","스마트폰","이석"],
+      datasets:[{ data:[1,0,0,0,0], backgroundColor:["#22c55e","#a78bfa","#fbbf24","#f87171","#4b5563"], borderWidth:0, hoverOffset:4 }] },
+    options:{ cutout:"65%", plugins:{ legend:{ display:false } } },
+  });
+}
+function makeHeadChart(id) {
+  return new Chart(document.getElementById(id), {
+    type:"bar",
+    data:{ labels:["고개숙임(DOWN)","좌측(LEFT)","우측(RIGHT)","위(UP)"],
+      datasets:[{ label:"누적(초)", data:[0,0,0,0],
+        backgroundColor:["rgba(251,191,36,.5)","rgba(167,139,250,.5)","rgba(167,139,250,.5)","rgba(96,165,250,.4)"],
+        borderColor:["#fbbf24","#a78bfa","#a78bfa","#60a5fa"], borderWidth:1.5, borderRadius:4 }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } },
+      scales:{ y:{ grid:{ color:"#1c2030" }, ticks:{ callback: v=>v+"초" } },
+               x:{ grid:{ display:false }, ticks:{ font:{ size:11 } } } } },
+  });
+}
 
-// Chart.js 초기화 — 이전 기록용
-const h_lineChart = new Chart(document.getElementById("h_lineChart"), {
-  type:"line",
-  data:{ labels:[], datasets:[
-    { label:"집중도", data:[], borderColor:"#60a5fa", backgroundColor:"rgba(96,165,250,.07)", borderWidth:2, pointRadius:3, pointBackgroundColor:"#60a5fa", tension:.4, fill:true },
-    { label:"EAR×100", data:[], borderColor:"#fbbf24", backgroundColor:"transparent", borderWidth:1.5, borderDash:[4,4], pointRadius:2, pointBackgroundColor:"#fbbf24", tension:.4 },
-  ]},
-  options:{ responsive:true, maintainAspectRatio:false,
-    plugins:{ legend:{ display:false } },
-    scales:{ y:{ min:0, max:100, grid:{ color:"#1c2030" }, ticks:{ stepSize:25 } },
-             x:{ grid:{ color:"#1c2030" }, ticks:{ font:{ size:10 }, maxTicksLimit:8 } } } },
-});
-const h_donutChart = new Chart(document.getElementById("h_donutChart"), {
-  type:"doughnut",
-  data:{ labels:["집중","자세 불량","졸음","스마트폰","이석"],
-    datasets:[{ data:[1,0,0,0,0], backgroundColor:["#22c55e","#a78bfa","#fbbf24","#f87171","#4b5563"], borderWidth:0, hoverOffset:4 }] },
-  options:{ cutout:"65%", plugins:{ legend:{ display:false } } },
-});
-const h_headChart = new Chart(document.getElementById("h_headChart"), {
-  type:"bar",
-  data:{ labels:["고개숙임(DOWN)","좌측(LEFT)","우측(RIGHT)","위(UP)"],
-    datasets:[{ label:"누적(초)", data:[0,0,0,0],
-      backgroundColor:["rgba(251,191,36,.5)","rgba(167,139,250,.5)","rgba(167,139,250,.5)","rgba(96,165,250,.4)"],
-      borderColor:["#fbbf24","#a78bfa","#a78bfa","#60a5fa"], borderWidth:1.5, borderRadius:4 }] },
-  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } },
-    scales:{ y:{ grid:{ color:"#1c2030" }, ticks:{ callback: v=>v+"초" } },
-             x:{ grid:{ display:false }, ticks:{ font:{ size:11 } } } } },
-});
+const lineChart   = makeLineChart("lineChart");
+const donutChart  = makeDonutChart("donutChart");
+const headChart   = makeHeadChart("headChart");
+const h_lineChart = makeLineChart("h_lineChart");
+const h_donutChart= makeDonutChart("h_donutChart");
+const h_headChart = makeHeadChart("h_headChart");
 
 // ════════════════════════════════════════════
-// 대시보드 UI 업데이트 (prefix로 라이브/이전기록 구분)
+// UI 렌더링
 // ════════════════════════════════════════════
 let prevDrowsyEvents = 0, prevPhoneCnt = 0;
 
@@ -608,25 +561,25 @@ function renderDashboard(stats, latest, prefix, lChart, dChart, hChart) {
   if (p("timeRange")) p("timeRange").textContent =
     `${startTime.toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"})} – ${endTime.toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"})}`;
 
-  p("studyTime").textContent   = fmtSec(totalSec);
-  p("studyBar").style.width    = Math.min(totalSec/(6*3600)*100,100)+"%";
-  p("drowsyTime").textContent  = fmtMin(drowsyCnt*2);
-  p("drowsyCount").textContent = `오늘 ${drowsyEvents}회 감지`;
-  p("drowsyBar").style.width   = Math.min(drowsyCnt/Math.max(total,1)*100*3,100)+"%";
-  p("phoneTime").textContent   = fmtMin(phoneCnt*2);
-  p("phoneBar").style.width    = Math.min(phoneCnt/Math.max(total,1)*100*3,100)+"%";
-  p("focusScore").textContent  = score;
-  p("focusSub").textContent    = `비정상 ${Math.round(bad/Math.max(total,1)*100)}%`;
-  p("focusBar").style.width    = score+"%";
+  p("studyTime").textContent    = fmtSec(totalSec);
+  p("studyBar").style.width     = Math.min(totalSec/(6*3600)*100,100)+"%";
+  p("drowsyTime").textContent   = fmtMin(drowsyCnt*2);
+  p("drowsyCount").textContent  = `오늘 ${drowsyEvents}회 감지`;
+  p("drowsyBar").style.width    = Math.min(drowsyCnt/Math.max(total,1)*100*3,100)+"%";
+  p("phoneTime").textContent    = fmtMin(phoneCnt*2);
+  p("phoneBar").style.width     = Math.min(phoneCnt/Math.max(total,1)*100*3,100)+"%";
+  p("focusScore").textContent   = score;
+  p("focusSub").textContent     = `비정상 ${Math.round(bad/Math.max(total,1)*100)}%`;
+  p("focusBar").style.width     = score+"%";
   p("totalBadPose").textContent = fmtMin(poseCnt*2);
-  p("abnormalRatio").textContent = Math.round(bad/Math.max(total,1)*100)+"%";
+  p("abnormalRatio").textContent= Math.round(bad/Math.max(total,1)*100)+"%";
 
   // 현재 상태 배너 (라이브 전용)
   if (latest && prefix === "") {
-    const ear    = latest.ear || 0;
-    const head   = latest.head_pose || "ABSENT";
-    const phone  = latest.is_using_phone || false;
-    const isDrowsy = ear < EAR_THRESHOLD && head !== "ABSENT";
+    const ear      = latest.ear || 0;
+    const head     = latest.head_pose || "ABSENT";
+    const phone    = latest.is_using_phone;
+    const isDrowsy = latest.is_drowsy;
     const [label, color] = statusLabel(head, phone, isDrowsy);
     const badge = p("statusBadge");
     badge.textContent = label;
@@ -636,9 +589,8 @@ function renderDashboard(stats, latest, prefix, lChart, dChart, hChart) {
     p("phoneVal").textContent  = phone ? "감지됨 ⚠️" : "없음 ✅";
     p("lastUpdate").textContent = new Date().toLocaleTimeString("ko-KR");
 
-    // 알림
     if (drowsyEvents > prevDrowsyEvents) {
-      addAlert("danger", `졸음 감지 — EAR ${ear.toFixed(2)} (${DROWSY_THRESHOLD}초 지속)`, "alertList");
+      addAlert("danger", `졸음 감지 — EAR ${ear.toFixed(2)}`, "alertList");
       prevDrowsyEvents = drowsyEvents;
     }
     if (phone && phoneCnt > prevPhoneCnt && phoneCnt % 3 === 1)
@@ -650,7 +602,6 @@ function renderDashboard(stats, latest, prefix, lChart, dChart, hChart) {
     prevPhoneCnt = phoneCnt;
   }
 
-  // 차트
   lChart.data.labels = tlLabels;
   lChart.data.datasets[0].data = tlFocus;
   lChart.data.datasets[1].data = tlEar;
@@ -667,7 +618,6 @@ function renderDashboard(stats, latest, prefix, lChart, dChart, hChart) {
   hChart.data.datasets[0].data = [headDown*2, headLeft*2, headRight*2, headUp*2];
   hChart.update("none");
 
-  // 타임라인
   const bar = p("tlBar");
   bar.innerHTML = "";
   tlSegs.forEach(c => {
@@ -697,87 +647,100 @@ function addAlert(level, msg, listId) {
 // ════════════════════════════════════════════
 // 메인 폴링 루프
 // ════════════════════════════════════════════
-let liveLogs  = [];
-let historyLoaded = false;
-let mockHistoryLogs = [];
-let mockCameraStartTick = 15; // Mock: 15틱(30초) 후 카메라 켜짐 시뮬레이션
 let tick_count = 0;
+let liveLogs   = [];
 
 async function tick() {
   tick_count++;
 
   if (USE_MOCK) {
-    // Mock 카메라 켜짐 시뮬레이션
-    const cameraOn = tick_count > mockCameraStartTick;
+    const cameraOn = tick_count > MOCK_CAMERA_START;
 
     if (!cameraOn) {
-      // 화면1: 카메라 미실행 → 이전 기록
       showScreen("history");
-      if (!historyLoaded) {
-        mockHistoryLogs = generateMockHistoryLogs();
-        historyLoaded = true;
-      }
+      if (!historyLoaded) { mockHistoryLogs = generateMockHistoryLogs(); historyLoaded = true; }
       if (mockHistoryLogs.length > 0) {
         document.getElementById("noHistoryMsg").style.display = "none";
         document.getElementById("historyDashboard").style.display = "";
-        const stats = calcStats(mockHistoryLogs);
-        renderDashboard(stats, null, "h_", h_lineChart, h_donutChart, h_headChart);
+        renderDashboard(calcStats(mockHistoryLogs), null, "h_", h_lineChart, h_donutChart, h_headChart);
       } else {
         document.getElementById("noHistoryMsg").style.display = "";
         document.getElementById("historyDashboard").style.display = "none";
       }
     } else if (liveLogs.length === 0) {
-      // 화면2: 카메라 켜졌는데 데이터 아직 없음
       showScreen("waiting");
       liveLogs.push(generateLiveMock());
     } else {
-      // 화면3: 라이브 대시보드
       showScreen("live");
+      document.getElementById("dbBadge").textContent = "● MOCK DATA";
       liveLogs.push(generateLiveMock());
       if (liveLogs.length > 500) liveLogs.shift();
-      const stats  = calcStats(liveLogs);
-      const latest = liveLogs[liveLogs.length-1];
-      renderDashboard(stats, latest, "", lineChart, donutChart, headChart);
+      renderDashboard(calcStats(liveLogs), liveLogs[liveLogs.length-1], "", lineChart, donutChart, headChart);
     }
 
   } else {
-    // ── 실제 Supabase 연동 ──
-    document.getElementById("dbBadge").textContent = "● SUPABASE LIVE";
+    // ── Flask API 실제 연동 ──
+    document.getElementById("dbBadge").textContent = "● FLASK LIVE";
     document.getElementById("dbBadge").className   = "db-badge db-live";
-    try {
-      const sessionLogs = await fetchSessionLogs();
 
-      if (sessionLogs.length === 0) {
-        // 현재 세션 데이터 없음 → 이전 기록 or 대기 화면
-        const todayLogs = await fetchTodayLogs();
-        if (todayLogs.length > 0) {
-          // 오늘 다른 세션 기록 있음 → 화면1 (이전 기록)
-          showScreen("history");
-          document.getElementById("noHistoryMsg").style.display = "none";
-          document.getElementById("historyDashboard").style.display = "";
-          const stats = calcStats(todayLogs);
-          renderDashboard(stats, null, "h_", h_lineChart, h_donutChart, h_headChart);
+    try {
+      // 현재 세션 활성 여부 확인
+      const sessionStatus = await fetchSessionStatus();
+
+      if (sessionStatus.active) {
+        // 라이브 모드
+        CURRENT_SESSION = sessionStatus.session_id;
+        localStorage.setItem("fg_session", CURRENT_SESSION);
+
+        const logs   = await fetchSessionLogs(CURRENT_SESSION);
+        const latest = await fetchLatestLog(CURRENT_SESSION);
+
+        if (logs.length === 0) {
+          showScreen("waiting");
         } else {
-          // 오늘 기록 자체 없음
-          showScreen("history");
-          document.getElementById("noHistoryMsg").style.display = "";
-          document.getElementById("historyDashboard").style.display = "none";
+          showScreen("live");
+          renderDashboard(calcStats(logs), latest, "", lineChart, donutChart, headChart);
         }
       } else {
-        // 현재 세션 데이터 있음 → 화면3 (라이브)
-        showScreen("live");
-        liveLogs = sessionLogs;
-        const stats  = calcStats(liveLogs);
-        const latest = await fetchLatest();
-        renderDashboard(stats, latest, "", lineChart, donutChart, headChart);
+        // 카메라 미실행 → 이전 기록
+        showScreen("history");
+        const sessions = await fetchTodaySessions();
+
+        if (sessions.length === 0) {
+          document.getElementById("noHistoryMsg").style.display = "";
+          document.getElementById("historyDashboard").style.display = "none";
+        } else {
+          // 오늘 마지막 세션 로그 표시
+          const lastSession = sessions[sessions.length - 1];
+          const logs = await fetchSessionLogs(lastSession.id);
+          const alerts = await fetchAlerts(lastSession.id);
+
+          document.getElementById("noHistoryMsg").style.display = "none";
+          document.getElementById("historyDashboard").style.display = "";
+          renderDashboard(calcStats(logs), null, "h_", h_lineChart, h_donutChart, h_headChart);
+
+          // 알림 표시
+          const alertList = document.getElementById("h_alertList");
+          if (alerts.length > 0) {
+            alertList.innerHTML = "";
+            alerts.forEach(a => {
+              const levelMap = { DROWSY:"danger", PHONE_USAGE:"danger", BAD_POSTURE:"warn", ABSENT:"info" };
+              const level = levelMap[a.alert_type] || "info";
+              const item  = document.createElement("div");
+              item.className = `alert-item ${level}`;
+              const t = new Date(a.triggered_at).toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"});
+              item.innerHTML = `<div class="alert-msg">${a.message}</div><div class="alert-time">${t}</div>`;
+              alertList.appendChild(item);
+            });
+          }
+        }
       }
     } catch(e) {
-      console.error("데이터 갱신 오류:", e);
+      console.error("Flask API 오류:", e);
     }
   }
 }
 
-// 초기 화면: 카메라 미실행 상태로 시작
 showScreen("history");
 tick();
 setInterval(tick, POLL_INTERVAL);

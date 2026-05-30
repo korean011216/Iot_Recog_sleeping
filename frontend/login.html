@@ -52,10 +52,9 @@ body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun 
 </div>
 
 <script>
-// ★ Supabase 키 및 설정 ★
-const SUPABASE_URL = "";
-const SUPABASE_KEY = "";
-const USE_MOCK = !(SUPABASE_URL && SUPABASE_KEY);
+// ★ Flask 서버 주소 — PC IP로 변경 필요
+const FLASK_URL = "http://127.0.0.1:5000";
+const USE_MOCK  = FLASK_URL.includes("127.0.0.1"); // 로컬이면 Mock 사용
 
 function showErr(msg) {
   const el = document.getElementById("errMsg");
@@ -79,28 +78,29 @@ async function handleLogin() {
 
   try {
     if (USE_MOCK) {
-      // Mock 로그인 — Supabase 키 없을 때
+      // Mock 로그인 — Flask 서버 없을 때
       await new Promise(r => setTimeout(r, 800));
       if (email === "test@test.com" && password === "1234") {
-        localStorage.setItem("fg_user", JSON.stringify({ id: "mock-user-id", email }));
+        localStorage.setItem("fg_user",    JSON.stringify({ id: "mock-user-id", email }));
         localStorage.setItem("fg_session", "mock-session-id");
         location.href = "dashboard.html";
       } else {
         showErr("아이디 또는 비밀번호가 올바르지 않습니다. (Mock: test@test.com / 1234)");
       }
     } else {
-      // ★ Supabase Auth 실제 로그인
-      const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", apikey: SUPABASE_KEY },
-        body: JSON.stringify({ email, password }),
+      // ★ Flask API 실제 로그인
+      const res  = await fetch(`${FLASK_URL}/api/auth/login`, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ email, password }),
       });
       const data = await res.json();
-      if (data.error) { showErr(data.error_description || "로그인 실패"); return; }
 
-      localStorage.setItem("fg_user",    JSON.stringify(data.user));
-      localStorage.setItem("fg_token",   data.access_token);
-      localStorage.setItem("fg_session", crypto.randomUUID());
+      if (!res.ok) { showErr(data.error || "로그인 실패"); return; }
+
+      localStorage.setItem("fg_user",    JSON.stringify({ id: data.user_id, email: data.email }));
+      localStorage.setItem("fg_token",   data.access_token || "");
+      localStorage.setItem("fg_session", "");  // 세션은 공부 시작 시 생성
       location.href = "dashboard.html";
     }
   } catch(e) {
@@ -111,7 +111,6 @@ async function handleLogin() {
   }
 }
 
-// 엔터키 로그인
 document.addEventListener("keydown", e => { if (e.key === "Enter") handleLogin(); });
 
 // 이미 로그인된 경우 바로 대시보드로
