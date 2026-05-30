@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FocusGuard — 로그인</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d0f14;color:#e8eaf0;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.card{background:#141720;border:1px solid #2a2f40;border-radius:14px;padding:40px 36px;width:100%;max-width:400px}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:32px;justify-content:center}
+.logo-dot{width:12px;height:12px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 8px #22c55e}50%{box-shadow:0 0 2px #22c55e}}
+.logo-title{font-size:18px;font-weight:700;letter-spacing:.02em}
+.title{font-size:22px;font-weight:700;margin-bottom:6px;text-align:center}
+.subtitle{font-size:13px;color:#5a5f72;text-align:center;margin-bottom:28px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;color:#8b90a0;margin-bottom:6px;letter-spacing:.04em}
+.field input{width:100%;background:#0d0f14;border:1px solid #2a2f40;border-radius:8px;padding:11px 14px;color:#e8eaf0;font-size:14px;outline:none;transition:border .2s}
+.field input:focus{border-color:#60a5fa}
+.field input::placeholder{color:#3a3f52}
+.btn{width:100%;padding:12px;border-radius:8px;border:none;background:#22c55e;color:#0d0f14;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.err{background:#1c1010;border:1px solid #f87171;border-radius:8px;padding:10px 14px;font-size:13px;color:#f87171;margin-bottom:16px;display:none}
+.footer{text-align:center;margin-top:24px;font-size:13px;color:#5a5f72}
+.footer a{color:#60a5fa;text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.divider{border:none;border-top:1px solid #2a2f40;margin:24px 0}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">
+    <div class="logo-dot"></div>
+    <div class="logo-title">FocusGuard</div>
+  </div>
+  <div class="title">로그인</div>
+  <div class="subtitle">집중도 모니터링 대시보드</div>
+  <div class="err" id="errMsg"></div>
+  <div class="field">
+    <label>아이디 (이메일)</label>
+    <input type="email" id="email" placeholder="example@email.com" autocomplete="email"/>
+  </div>
+  <div class="field">
+    <label>비밀번호</label>
+    <input type="password" id="password" placeholder="비밀번호 입력" autocomplete="current-password"/>
+  </div>
+  <button class="btn" id="loginBtn" onclick="handleLogin()">로그인</button>
+  <hr class="divider"/>
+  <div class="footer">계정이 없으신가요? <a href="register.html">회원가입</a></div>
+</div>
+
+<script>
+// ★ Supabase 키 및 설정 ★
+const SUPABASE_URL = "";
+const SUPABASE_KEY = "";
+const USE_MOCK = !(SUPABASE_URL && SUPABASE_KEY);
+
+function showErr(msg) {
+  const el = document.getElementById("errMsg");
+  el.textContent = msg;
+  el.style.display = "block";
+}
+function hideErr() {
+  document.getElementById("errMsg").style.display = "none";
+}
+
+async function handleLogin() {
+  hideErr();
+  const email    = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const btn      = document.getElementById("loginBtn");
+
+  if (!email || !password) { showErr("아이디와 비밀번호를 입력해주세요."); return; }
+
+  btn.disabled = true;
+  btn.textContent = "로그인 중...";
+
+  try {
+    if (USE_MOCK) {
+      // Mock 로그인 — Supabase 키 없을 때
+      await new Promise(r => setTimeout(r, 800));
+      if (email === "test@test.com" && password === "1234") {
+        localStorage.setItem("fg_user", JSON.stringify({ id: "mock-user-id", email }));
+        localStorage.setItem("fg_session", "mock-session-id");
+        location.href = "dashboard.html";
+      } else {
+        showErr("아이디 또는 비밀번호가 올바르지 않습니다. (Mock: test@test.com / 1234)");
+      }
+    } else {
+      // ★ Supabase Auth 실제 로그인
+      const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", apikey: SUPABASE_KEY },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (data.error) { showErr(data.error_description || "로그인 실패"); return; }
+
+      localStorage.setItem("fg_user",    JSON.stringify(data.user));
+      localStorage.setItem("fg_token",   data.access_token);
+      localStorage.setItem("fg_session", crypto.randomUUID());
+      location.href = "dashboard.html";
+    }
+  } catch(e) {
+    showErr("서버 연결 오류: " + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "로그인";
+  }
+}
+
+// 엔터키 로그인
+document.addEventListener("keydown", e => { if (e.key === "Enter") handleLogin(); });
+
+// 이미 로그인된 경우 바로 대시보드로
+if (localStorage.getItem("fg_user")) location.href = "dashboard.html";
+</script>
+</body>
+</html>

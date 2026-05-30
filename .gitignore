@@ -1,3 +1,11 @@
-venv/
+# --- AI Models ---
+*.pt
+*.onnx
+
+# --- Virtual Environment ---
 .venv/
+venv/
+
+# --- Python Cache ---
 __pycache__/
+*.pyc
