@@ -1,6 +1,7 @@
 import cv2
 import requests
 import time
+import hardware_controller
 
 # 비전 디렉토리 내 파일들 통합본이므로 이 파일 사용시 비전 디렉토리 내 다른 모든 파일들 삭제 필요
 
@@ -80,9 +81,11 @@ def main():
                     phone_warning_count += 1
                     total_phone_time += 2
                     if phone_warning_count >= PHONE_WARNING_THRESHOLD:
-                        print("[경고] 스마트폰 감지 (추후 LED 깜빡임 코드 추가 예정)")
+                        print("[경고] 스마트폰 감지")
+                        hardware_controller.turn_on_phone_warning()
                 else:
                     phone_warning_count = 0
+                    hardware_controller.turn_off_phone_warning()
 
                 # =========================
                 # 졸음 및 자세 불량 판정 (5초 유예 적용)
@@ -110,7 +113,8 @@ def main():
                         if abnormal_start_time is None:
                             abnormal_start_time = time.time()
                         elif time.time() - abnormal_start_time >= DROWSY_TIME_THRESHOLD:
-                            print("[경고] 졸음/딴짓 감지 (추후 부저 소리 코드 추가 예정)")
+                            print("[경고] 졸음/딴짓 감지")
+                            hardware_controller.trigger_sleep_warning()
                     else:
                         # 유예 시간 중 — 아직 정상 처리
                         remaining = GRACE_PERIOD - elapsed_grace
@@ -141,6 +145,22 @@ def main():
         ratio = (focus_time / total_run_time * 100) if total_run_time > 0 else 0
         print(f"최종 집중도     : {ratio:.1f}%")
         print("==================================")
+
+
+        print("▶ 백엔드로 최종 통계 데이터를 전송합니다...")
+        try:
+            stats_data = {
+                "total_study_time": total_run_time,
+                "total_phone_time": total_phone_time,
+                "total_drowsy_time": total_drowsy_time,
+                "total_bad_pose_time": total_bad_pose_time
+            }
+            # 서버의 세션 종료 API로 데이터 전송 (주소는 백엔드 라우터 설정에 맞게 변경)
+            session_end_url = SERVER_URL.replace("/analyze", "/session/end") 
+            requests.post(session_end_url, json=stats_data, timeout=3)
+            print("통계 저장 완료")
+        except Exception as e:
+            print(f"통계 전송 실패: {e}")
 
     # 에러가 나든 정상 종료되든 카메라는 무조건 끄도록 처리
     finally:

@@ -15,18 +15,18 @@ if HARDWARE_READY:
     sleep_buzzer = Buzzer(BUZZER_PIN)
 
 # 하드웨어 동작 함수 모음
-def trigger_phone_warning():
-    """ 스마트폰 감지 시 -> LED 3번 깜빡임 """
+def turn_on_phone_warning():
+    """ 폰 감지 중: LED 계속 켜기 """
     if not HARDWARE_READY:
-        print("[폰 감지] LED가 3번 깜빡입니다")
+        print("[폰 감지] LED ON")
         return
-    
-    # 실제 라즈베리파이 작동 로직
-    for _ in range(3):
-        warning_led.on()
-        time.sleep(0.2)
-        warning_led.off()
-        time.sleep(0.2)
+    warning_led.on()
+
+def turn_off_phone_warning():
+    """ 폰 안 보임: LED 끄기 """
+    if not HARDWARE_READY:
+        return
+    warning_led.off()
 
 def trigger_sleep_warning():
     """ 졸음 및 고개숙임 감지 시 -> 부저 1초간 울림 """
